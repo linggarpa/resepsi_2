@@ -5,6 +5,7 @@ import 'package:resepsi_2/screens/forgot_password_screen/forgot_password_screen.
 import 'package:resepsi_2/screens/main_screen/main_screen.dart';
 import 'package:resepsi_2/screens/new_password_screen/new_password_screen.dart';
 import 'package:resepsi_2/screens/otp_screen/otp_screen.dart';
+import 'package:resepsi_2/screens/profile_screen/my_recipes_detail/my_recipe_detail.dart';
 import 'package:resepsi_2/screens/profile_screen/profile_screen.dart';
 import 'package:sizer/sizer.dart';
 import 'screens/intro_screen/intro_screen.dart';
@@ -126,6 +127,7 @@ class MyApp extends StatelessWidget {
             NewPasswordScreen.routeName: (context) => NewPasswordScreen(),
             MainScreen.routeName: (context) => MainScreen(),
             MyProfileScreen.routeName: (context) => MyProfileScreen(),
+            MyRecipeDetailScreen.routeName: (context) => MyRecipeDetailScreen(),
           },
         );
       },

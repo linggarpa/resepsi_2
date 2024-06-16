@@ -5,6 +5,7 @@ import 'package:resepsi_2/constants.dart'; // Pastikan constants.dart memiliki p
 import 'package:resepsi_2/global_widgets/custom_grids.dart';
 import 'package:resepsi_2/screens/profile_screen/components/profile_components.dart';
 import 'package:resepsi_2/screens/profile_screen/model/profile_model.dart';
+import 'package:resepsi_2/screens/profile_screen/my_recipes_detail/my_recipe_detail.dart';
 import 'package:resepsi_2/screens/sign_in_screen/sign_in_screen.dart';
 import 'package:sizer/sizer.dart';
 
@@ -33,7 +34,7 @@ class _MyProfileScreen extends State<MyProfileScreen>
   }
 
   MyProfileDetailModel myProfileDetailModel = MyProfileDetailModel(
-      'assets/images/karina.jpeg', 'Karina', '32', '99', '100');
+      'assets/images/karina.jpeg', 'Karina', '4', '99', '100');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -122,7 +123,15 @@ class _MyProfileScreen extends State<MyProfileScreen>
       itemBuilder: (BuildContext context, int index) {
         final recipe = myRecipes[index];
         return ProfileGridWidget(
-          onPress: () {},
+          onPress: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => MyRecipeDetailScreen(
+                          myProfileDetailModel: myProfileDetailModel,
+                          myRecipesItemModel: myRecipes[index],
+                        )));
+          },
           favIcon: recipe.favorite ? Icons.favorite : Icons.favorite_outline,
           favIconColor:
               recipe.favorite ? kErrorBorderColor : kTextSecondaryColor,
