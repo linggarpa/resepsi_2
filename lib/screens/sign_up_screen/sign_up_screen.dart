@@ -129,7 +129,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       keyboardType: TextInputType.emailAddress,
       style: inputTextHintStyle,
       decoration: InputDecoration(
-        labelText: 'Email or phone number',
+        labelText: 'Email',
         suffixIcon: CustomSuffixIcon(
           iconSrc: 'assets/icons/email.svg',
           iconColor:

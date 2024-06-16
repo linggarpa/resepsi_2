@@ -65,10 +65,10 @@ class _MainScreenState extends State<MainScreen> {
                     myPage.jumpToPage(_selectedIndex);
                   });
                 },
-                iconData: Icons.favorite,
+                iconData: Icons.notifications,
                 iconColor:
                     _selectedIndex == 2 ? kPrimaryColor : kTextSecondaryColor,
-                title: 'Favorite',
+                title: 'Notification',
                 textColor:
                     _selectedIndex == 2 ? kPrimaryColor : kTextSecondaryColor,
               ),
@@ -101,7 +101,7 @@ class _MainScreenState extends State<MainScreen> {
             child: Text('Upload'),
           ),
           Center(
-            child: Text('Favourite'),
+            child: Text('Notification'),
           ),
           // MyProfile page
           MyProfileScreen(),

@@ -6,6 +6,7 @@ import 'package:resepsi_2/global_widgets/custom_grids.dart';
 import 'package:resepsi_2/screens/profile_screen/components/profile_components.dart';
 import 'package:resepsi_2/screens/profile_screen/model/profile_model.dart';
 import 'package:resepsi_2/screens/profile_screen/my_recipes_detail/my_recipe_detail.dart';
+import 'package:resepsi_2/screens/profile_screen/my_recipes_detail/my_likerecipe_detail.dart';
 import 'package:resepsi_2/screens/sign_in_screen/sign_in_screen.dart';
 import 'package:sizer/sizer.dart';
 
@@ -152,7 +153,15 @@ class _MyProfileScreen extends State<MyProfileScreen>
       itemBuilder: (BuildContext context, int index) {
         final likerecipe = myLikeRecipes[index];
         return ProfileGridWidget(
-          onPress: () {},
+          onPress: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => MyLikeDetailScreen(
+                          myProfileDetailModel: myProfileDetailModel,
+                          myLikeItemModel: myLikeRecipes[index],
+                        )));
+          },
           favIcon:
               likerecipe.favorite ? Icons.favorite : Icons.favorite_outline,
           favIconColor:
