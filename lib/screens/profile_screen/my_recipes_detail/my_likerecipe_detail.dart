@@ -179,6 +179,7 @@ class MyLikeDetailScreen extends StatelessWidget {
                                 'Ingredients',
                                 style: Theme.of(context).textTheme.headline6,
                               ),
+                              kSizedBox2,
                               kSizedBox1,
                               //
                               Text(
@@ -198,6 +199,7 @@ class MyLikeDetailScreen extends StatelessWidget {
                                 'Steps',
                                 style: Theme.of(context).textTheme.headline6,
                               ),
+                              kSizedBox2,
                               kSizedBox1,
                               Text(
                                 getNowLingString(

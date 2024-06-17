@@ -27,9 +27,18 @@ const kDivider = Divider(
 
 final screensDefaultPadding = EdgeInsets.only(left: 4.w, right: 4.w);
 
+const kcrossAxisCount = 2;
+final kmainAxisSpacing = 1.h;
+
+final kHomeGridDelegate = SliverGridDelegateWithFixedCrossAxisCount(
+  crossAxisCount: kcrossAxisCount,
+  mainAxisSpacing: kmainAxisSpacing,
+  childAspectRatio: 1 / 1.8,
+);
+
 final kMyProfileGridDelegate = SliverGridDelegateWithFixedCrossAxisCount(
-  crossAxisCount: 2,
-  mainAxisSpacing: 1.h,
+  crossAxisCount: kcrossAxisCount,
+  mainAxisSpacing: kmainAxisSpacing,
   childAspectRatio: 1 / 1.4,
 );
 

@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:resepsi_2/constants.dart';
 import 'package:resepsi_2/screens/forgot_password_screen/forgot_password_screen.dart';
+import 'package:resepsi_2/screens/home_screens/home_screen.dart';
 import 'package:resepsi_2/screens/main_screen/main_screen.dart';
 import 'package:resepsi_2/screens/new_password_screen/new_password_screen.dart';
 import 'package:resepsi_2/screens/otp_screen/otp_screen.dart';
+import 'package:resepsi_2/screens/profile_screen/my_recipes_detail/my_homerecipe_detail.dart';
 import 'package:resepsi_2/screens/profile_screen/my_recipes_detail/my_likerecipe_detail.dart';
 import 'package:resepsi_2/screens/profile_screen/my_recipes_detail/my_recipe_detail.dart';
 import 'package:resepsi_2/screens/profile_screen/profile_screen.dart';
@@ -127,6 +129,8 @@ class MyApp extends StatelessWidget {
             OtpScreen.routeName: (context) => OtpScreen(),
             NewPasswordScreen.routeName: (context) => NewPasswordScreen(),
             MainScreen.routeName: (context) => MainScreen(),
+            HomeScreen.routeName: (context) => HomeScreen(),
+            MyHomeDetailScreen.routeName: (context) => MyHomeDetailScreen(),
             MyProfileScreen.routeName: (context) => MyProfileScreen(),
             MyRecipeDetailScreen.routeName: (context) => MyRecipeDetailScreen(),
             MyLikeDetailScreen.routeName: (context) => MyLikeDetailScreen(),

@@ -2,17 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:resepsi_2/constants.dart';
 import 'package:resepsi_2/metods/text_capitalize.dart';
-import 'package:resepsi_2/screens/profile_screen/model/profile_model.dart';
+import 'package:resepsi_2/screens/home_screens/home_model.dart';
 import 'package:sizer/sizer.dart';
 
-class MyRecipeDetailScreen extends StatelessWidget {
-  const MyRecipeDetailScreen(
-      {Key? key, this.myProfileDetailModel, this.myRecipesItemModel})
-      : super(key: key);
-  static const String routeName = 'MyRecipeDetailScreen';
+class MyHomeDetailScreen extends StatelessWidget {
+  const MyHomeDetailScreen({Key? key, this.myHomeItemModel}) : super(key: key);
+  static const String routeName = 'MyHomeDetailScreen';
 
-  final MyProfileDetailModel? myProfileDetailModel;
-  final MyRecipesItemModel? myRecipesItemModel;
+  final HomeItemModel? myHomeItemModel;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,8 +18,7 @@ class MyRecipeDetailScreen extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage(myRecipesItemModel!.img),
-                  fit: BoxFit.cover),
+                  image: AssetImage(myHomeItemModel!.img), fit: BoxFit.cover),
             ),
             child: Container(
               width: 100.w,
@@ -67,7 +63,7 @@ class MyRecipeDetailScreen extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    myRecipesItemModel!.name,
+                                    myHomeItemModel!.name,
                                     textAlign: TextAlign.start,
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
@@ -92,7 +88,7 @@ class MyRecipeDetailScreen extends StatelessWidget {
                               Row(
                                 children: [
                                   Text(
-                                    myRecipesItemModel!.foodtype,
+                                    myHomeItemModel!.foodtype,
                                     textAlign: TextAlign.start,
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
@@ -100,7 +96,7 @@ class MyRecipeDetailScreen extends StatelessWidget {
                                         Theme.of(context).textTheme.subtitle2,
                                   ),
                                   Text(
-                                    myRecipesItemModel!.duration,
+                                    myHomeItemModel!.duration,
                                     textAlign: TextAlign.start,
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
@@ -119,13 +115,13 @@ class MyRecipeDetailScreen extends StatelessWidget {
                                     children: [
                                       CircleAvatar(
                                         backgroundImage: AssetImage(
-                                            myProfileDetailModel!.myImage),
+                                            myHomeItemModel!.chefImg),
                                       ),
                                       SizedBox(
                                         width: 3.w,
                                       ),
                                       Text(
-                                        myProfileDetailModel!.myName,
+                                        myHomeItemModel!.chefName,
                                         style: Theme.of(context)
                                             .textTheme
                                             .subtitle2!
@@ -147,7 +143,7 @@ class MyRecipeDetailScreen extends StatelessWidget {
                                         width: 1.w,
                                       ),
                                       Text(
-                                        "${myRecipesItemModel!.likesCount}Likes",
+                                        "${myHomeItemModel!.likesCount}Likes",
                                         style: Theme.of(context)
                                             .textTheme
                                             .subtitle2!
@@ -170,7 +166,7 @@ class MyRecipeDetailScreen extends StatelessWidget {
                               ),
                               kSizedBox2,
                               Text(
-                                myRecipesItemModel!.description,
+                                myHomeItemModel!.description,
                                 style: Theme.of(context).textTheme.subtitle2,
                               ),
                               kSizedBox2,
@@ -185,8 +181,7 @@ class MyRecipeDetailScreen extends StatelessWidget {
                               //
                               Text(
                                 getNowLingString(
-                                    myRecipesItemModel!.ingredients.toList(),
-                                    '•'),
+                                    myHomeItemModel!.ingredients.toList(), '•'),
                                 style: Theme.of(context)
                                     .textTheme
                                     .subtitle2!
@@ -205,7 +200,7 @@ class MyRecipeDetailScreen extends StatelessWidget {
                               kSizedBox1,
                               Text(
                                 getNowLingString(
-                                    myRecipesItemModel!.recipesSteps.toList(),
+                                    myHomeItemModel!.recipesSteps.toList(),
                                     '•'),
                                 style: Theme.of(context)
                                     .textTheme

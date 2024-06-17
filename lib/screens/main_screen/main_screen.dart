@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:resepsi_2/constants.dart';
 import 'package:resepsi_2/global_widgets/custom_bottombar.dart';
+import 'package:resepsi_2/screens/home_screens/home_screen.dart';
 import 'package:resepsi_2/screens/profile_screen/profile_screen.dart';
 import 'package:sizer/sizer.dart';
 
@@ -94,9 +95,7 @@ class _MainScreenState extends State<MainScreen> {
         controller: myPage,
         physics: const NeverScrollableScrollPhysics(),
         children: const <Widget>[
-          Center(
-            child: Text('Home'),
-          ),
+          HomeScreen(),
           Center(
             child: Text('Upload'),
           ),
