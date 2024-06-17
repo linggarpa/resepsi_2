@@ -88,10 +88,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   scrollDirection: Axis.vertical,
                   children: [
                     _buildAllRecipes(),
-                    _buildAllRecipes(),
-                    const Center(
-                      child: Text('Drink'),
-                    ),
+                    _buildFoodRecipes(),
+                    _buildDrinkRecipes(),
                   ],
                 ))
               ],
@@ -130,6 +128,74 @@ class _HomeScreenState extends State<HomeScreen> {
         );
       },
       itemCount: homeModel.length,
+    );
+  }
+
+  _buildFoodRecipes() {
+    List<HomeItemModel> filteredHomeModel =
+        homeModel.where((item) => item.foodtype == 'Food').toList();
+    return GridView.builder(
+      gridDelegate: kHomeGridDelegate,
+      shrinkWrap: true,
+      itemBuilder: (BuildContext context, int index) {
+        return HomeGridWidget(
+          onPress: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => MyHomeDetailScreen(
+                          myHomeItemModel: filteredHomeModel[index],
+                        )));
+          },
+          chefName: filteredHomeModel[index].chefName,
+          chefImg: filteredHomeModel[index].chefImg,
+          favIcon: filteredHomeModel[index].favorite
+              ? Icons.favorite
+              : Icons.favorite_outline,
+          favIconColor: filteredHomeModel[index].favorite
+              ? kErrorBorderColor
+              : kScaffoldColor,
+          recipeImage: filteredHomeModel[index].img,
+          recipeName: filteredHomeModel[index].name,
+          recipeType: filteredHomeModel[index].foodtype,
+          recipeDuration: filteredHomeModel[index].duration,
+        );
+      },
+      itemCount: filteredHomeModel.length,
+    );
+  }
+
+  _buildDrinkRecipes() {
+    List<HomeItemModel> filteredHomeModel =
+        homeModel.where((item) => item.foodtype == 'Drink').toList();
+    return GridView.builder(
+      gridDelegate: kHomeGridDelegate,
+      shrinkWrap: true,
+      itemBuilder: (BuildContext context, int index) {
+        return HomeGridWidget(
+          onPress: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => MyHomeDetailScreen(
+                          myHomeItemModel: filteredHomeModel[index],
+                        )));
+          },
+          chefName: filteredHomeModel[index].chefName,
+          chefImg: filteredHomeModel[index].chefImg,
+          favIcon: filteredHomeModel[index].favorite
+              ? Icons.favorite
+              : Icons.favorite_outline,
+          favIconColor: filteredHomeModel[index].favorite
+              ? kErrorBorderColor
+              : kScaffoldColor,
+          recipeImage: filteredHomeModel[index].img,
+          recipeName: filteredHomeModel[index].name,
+          recipeType: filteredHomeModel[index].foodtype,
+          recipeDuration: filteredHomeModel[index].duration,
+        );
+      },
+      itemCount: filteredHomeModel.length,
     );
   }
 

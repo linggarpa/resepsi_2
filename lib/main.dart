@@ -7,7 +7,6 @@ import 'package:resepsi_2/screens/main_screen/main_screen.dart';
 import 'package:resepsi_2/screens/new_password_screen/new_password_screen.dart';
 import 'package:resepsi_2/screens/otp_screen/otp_screen.dart';
 import 'package:resepsi_2/screens/profile_screen/my_recipes_detail/my_homerecipe_detail.dart';
-import 'package:resepsi_2/screens/profile_screen/my_recipes_detail/my_likerecipe_detail.dart';
 import 'package:resepsi_2/screens/profile_screen/my_recipes_detail/my_recipe_detail.dart';
 import 'package:resepsi_2/screens/profile_screen/profile_screen.dart';
 import 'package:sizer/sizer.dart';
@@ -133,7 +132,6 @@ class MyApp extends StatelessWidget {
             MyHomeDetailScreen.routeName: (context) => MyHomeDetailScreen(),
             MyProfileScreen.routeName: (context) => MyProfileScreen(),
             MyRecipeDetailScreen.routeName: (context) => MyRecipeDetailScreen(),
-            MyLikeDetailScreen.routeName: (context) => MyLikeDetailScreen(),
           },
         );
       },

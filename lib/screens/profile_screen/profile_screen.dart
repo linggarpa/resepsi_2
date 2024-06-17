@@ -6,7 +6,6 @@ import 'package:resepsi_2/global_widgets/custom_grids.dart';
 import 'package:resepsi_2/screens/profile_screen/components/profile_components.dart';
 import 'package:resepsi_2/screens/profile_screen/model/profile_model.dart';
 import 'package:resepsi_2/screens/profile_screen/my_recipes_detail/my_recipe_detail.dart';
-import 'package:resepsi_2/screens/profile_screen/my_recipes_detail/my_likerecipe_detail.dart';
 import 'package:resepsi_2/screens/sign_in_screen/sign_in_screen.dart';
 import 'package:sizer/sizer.dart';
 
@@ -146,30 +145,31 @@ class _MyProfileScreen extends State<MyProfileScreen>
   }
 
   _buildMyLike() {
+    List<MyRecipesItemModel> filteredRecipeModel =
+        myRecipes.where((item) => item.favorite == true).toList();
     return GridView.builder(
       gridDelegate: kMyProfileGridDelegate,
-      itemCount:
-          myLikeRecipes.length, // Pastikan ini sesuai dengan panjang daftar
+      itemCount: filteredRecipeModel
+          .length, // Pastikan ini sesuai dengan panjang daftar
       itemBuilder: (BuildContext context, int index) {
-        final likerecipe = myLikeRecipes[index];
+        final recipe = filteredRecipeModel[index];
         return ProfileGridWidget(
           onPress: () {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => MyLikeDetailScreen(
+                    builder: (context) => MyRecipeDetailScreen(
                           myProfileDetailModel: myProfileDetailModel,
-                          myLikeItemModel: myLikeRecipes[index],
+                          myRecipesItemModel: filteredRecipeModel[index],
                         )));
           },
-          favIcon:
-              likerecipe.favorite ? Icons.favorite : Icons.favorite_outline,
+          favIcon: recipe.favorite ? Icons.favorite : Icons.favorite_outline,
           favIconColor:
-              likerecipe.favorite ? kErrorBorderColor : kTextSecondaryColor,
-          recipeImage: likerecipe.img,
-          recipeName: likerecipe.name,
-          recipeType: likerecipe.foodtype,
-          recipeDuration: likerecipe.duration,
+              recipe.favorite ? kErrorBorderColor : kTextSecondaryColor,
+          recipeImage: recipe.img,
+          recipeName: recipe.name,
+          recipeType: recipe.foodtype,
+          recipeDuration: recipe.duration,
         );
       },
     );

@@ -5,11 +5,26 @@ import 'package:resepsi_2/metods/text_capitalize.dart';
 import 'package:resepsi_2/screens/home_screens/home_model.dart';
 import 'package:sizer/sizer.dart';
 
-class MyHomeDetailScreen extends StatelessWidget {
+class MyHomeDetailScreen extends StatefulWidget {
   const MyHomeDetailScreen({Key? key, this.myHomeItemModel}) : super(key: key);
   static const String routeName = 'MyHomeDetailScreen';
 
   final HomeItemModel? myHomeItemModel;
+
+  @override
+  _MyHomeDetailScreenState createState() => _MyHomeDetailScreenState();
+}
+
+class _MyHomeDetailScreenState extends State<MyHomeDetailScreen> {
+  // Using the widget.myHomeItemModel property to get the current favorite status
+  late bool isFavorite;
+
+  @override
+  void initState() {
+    super.initState();
+    isFavorite = widget.myHomeItemModel!.favorite;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +33,9 @@ class MyHomeDetailScreen extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage(myHomeItemModel!.img), fit: BoxFit.cover),
+                image: AssetImage(widget.myHomeItemModel!.img),
+                fit: BoxFit.cover,
+              ),
             ),
             child: Container(
               width: 100.w,
@@ -63,40 +80,53 @@ class MyHomeDetailScreen extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    myHomeItemModel!.name,
+                                    widget.myHomeItemModel!.name,
                                     textAlign: TextAlign.start,
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
                                     style:
                                         Theme.of(context).textTheme.headline6,
                                   ),
-                                  Text(
-                                    '➕ Favourite',
-                                    textAlign: TextAlign.start,
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .subtitle1!
-                                        .copyWith(
-                                            color: kPrimaryColor,
-                                            fontWeight: FontWeight.w400),
-                                  )
+                                  InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        // Toggle the favorite status
+                                        isFavorite = !isFavorite;
+                                        widget.myHomeItemModel!.favorite =
+                                            isFavorite;
+                                      });
+                                    },
+                                    child: Text(
+                                      isFavorite
+                                          ? '❌ Remove Favourite'
+                                          : '➕ Favourite',
+                                      textAlign: TextAlign.start,
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .subtitle1!
+                                          .copyWith(
+                                              color: kPrimaryColor,
+                                              fontWeight: FontWeight.w400),
+                                    ),
+                                  ),
                                 ],
                               ),
                               kSizedBox1,
                               Row(
                                 children: [
                                   Text(
-                                    myHomeItemModel!.foodtype,
+                                    widget.myHomeItemModel!.foodtype,
                                     textAlign: TextAlign.start,
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
                                     style:
                                         Theme.of(context).textTheme.subtitle2,
                                   ),
+                                  SizedBox(width: 1.w),
                                   Text(
-                                    myHomeItemModel!.duration,
+                                    widget.myHomeItemModel!.duration,
                                     textAlign: TextAlign.start,
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
@@ -115,13 +145,13 @@ class MyHomeDetailScreen extends StatelessWidget {
                                     children: [
                                       CircleAvatar(
                                         backgroundImage: AssetImage(
-                                            myHomeItemModel!.chefImg),
+                                            widget.myHomeItemModel!.chefImg),
                                       ),
                                       SizedBox(
                                         width: 3.w,
                                       ),
                                       Text(
-                                        myHomeItemModel!.chefName,
+                                        widget.myHomeItemModel!.chefName,
                                         style: Theme.of(context)
                                             .textTheme
                                             .subtitle2!
@@ -135,7 +165,7 @@ class MyHomeDetailScreen extends StatelessWidget {
                                   ),
                                   Row(
                                     children: [
-                                      const Icon(
+                                      Icon(
                                         Icons.favorite,
                                         color: kErrorBorderColor,
                                       ),
@@ -143,7 +173,7 @@ class MyHomeDetailScreen extends StatelessWidget {
                                         width: 1.w,
                                       ),
                                       Text(
-                                        "${myHomeItemModel!.likesCount}Likes",
+                                        "${widget.myHomeItemModel!.likesCount} Likes",
                                         style: Theme.of(context)
                                             .textTheme
                                             .subtitle2!
@@ -166,7 +196,7 @@ class MyHomeDetailScreen extends StatelessWidget {
                               ),
                               kSizedBox2,
                               Text(
-                                myHomeItemModel!.description,
+                                widget.myHomeItemModel!.description,
                                 style: Theme.of(context).textTheme.subtitle2,
                               ),
                               kSizedBox2,
@@ -178,10 +208,11 @@ class MyHomeDetailScreen extends StatelessWidget {
                               ),
                               kSizedBox2,
                               kSizedBox1,
-                              //
                               Text(
                                 getNowLingString(
-                                    myHomeItemModel!.ingredients.toList(), '•'),
+                                    widget.myHomeItemModel!.ingredients
+                                        .toList(),
+                                    '•'),
                                 style: Theme.of(context)
                                     .textTheme
                                     .subtitle2!
@@ -198,21 +229,28 @@ class MyHomeDetailScreen extends StatelessWidget {
                               ),
                               kSizedBox2,
                               kSizedBox1,
-                              Text(
-                                getNowLingString(
-                                    myHomeItemModel!.recipesSteps.toList(),
-                                    '•'),
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .subtitle2!
-                                    .copyWith(
-                                      fontWeight: FontWeight.w700,
-                                      color: kTextPrimaryColor,
-                                      letterSpacing: 0.5,
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: List.generate(
+                                  widget.myHomeItemModel!.recipesSteps.length,
+                                  (index) => Padding(
+                                    padding: EdgeInsets.symmetric(vertical: 4),
+                                    child: Text(
+                                      '${index + 1}. ${widget.myHomeItemModel!.recipesSteps[index]}',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .subtitle2!
+                                          .copyWith(
+                                            fontWeight: FontWeight.w700,
+                                            color: kTextPrimaryColor,
+                                            letterSpacing: 0.5,
+                                          ),
                                     ),
+                                  ),
+                                ),
                               ),
                             ],
-                          )
+                          ),
                         ],
                       ),
                     ),
@@ -222,28 +260,29 @@ class MyHomeDetailScreen extends StatelessWidget {
             ),
           ),
           Positioned(
-              top: 40,
-              left: 10,
-              child: InkWell(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Container(
-                  width: 12.w,
-                  height: 6.h,
-                  decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 255, 255, 255).withOpacity(0.8),
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Color(0x0fffffff),
-                        blurRadius: 4,
-                      )
-                    ],
-                  ),
-                  child: const Icon(CupertinoIcons.back),
+            top: 40,
+            left: 10,
+            child: InkWell(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Container(
+                width: 12.w,
+                height: 6.h,
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 255, 255, 255).withOpacity(0.8),
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Color(0x0fffffff),
+                      blurRadius: 4,
+                    )
+                  ],
                 ),
-              ))
+                child: const Icon(CupertinoIcons.back),
+              ),
+            ),
+          )
         ],
       ),
     );

@@ -5,7 +5,7 @@ import 'package:resepsi_2/metods/text_capitalize.dart';
 import 'package:resepsi_2/screens/profile_screen/model/profile_model.dart';
 import 'package:sizer/sizer.dart';
 
-class MyRecipeDetailScreen extends StatelessWidget {
+class MyRecipeDetailScreen extends StatefulWidget {
   const MyRecipeDetailScreen(
       {Key? key, this.myProfileDetailModel, this.myRecipesItemModel})
       : super(key: key);
@@ -13,6 +13,21 @@ class MyRecipeDetailScreen extends StatelessWidget {
 
   final MyProfileDetailModel? myProfileDetailModel;
   final MyRecipesItemModel? myRecipesItemModel;
+
+  @override
+  _MyRecipeDetailScreenState createState() => _MyRecipeDetailScreenState();
+}
+
+class _MyRecipeDetailScreenState extends State<MyRecipeDetailScreen> {
+  late bool isFavorite;
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialize isFavorite with the value from the model
+    isFavorite = widget.myRecipesItemModel!.favorite;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,8 +36,9 @@ class MyRecipeDetailScreen extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage(myRecipesItemModel!.img),
-                  fit: BoxFit.cover),
+                image: AssetImage(widget.myRecipesItemModel!.img),
+                fit: BoxFit.cover,
+              ),
             ),
             child: Container(
               width: 100.w,
@@ -67,46 +83,60 @@ class MyRecipeDetailScreen extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    myRecipesItemModel!.name,
+                                    widget.myRecipesItemModel!.name,
                                     textAlign: TextAlign.start,
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
                                     style:
                                         Theme.of(context).textTheme.headline6,
                                   ),
-                                  Text(
-                                    '➕ Favourite',
-                                    textAlign: TextAlign.start,
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .subtitle1!
-                                        .copyWith(
+                                  InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        // Toggle the favorite status
+                                        isFavorite = !isFavorite;
+                                        widget.myRecipesItemModel!.favorite =
+                                            isFavorite;
+                                      });
+                                    },
+                                    child: Text(
+                                      isFavorite
+                                          ? '❌ Remove Favourite'
+                                          : '➕ Favourite',
+                                      textAlign: TextAlign.start,
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .subtitle1!
+                                          .copyWith(
                                             color: kPrimaryColor,
-                                            fontWeight: FontWeight.w400),
-                                  )
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                    ),
+                                  ),
                                 ],
                               ),
                               kSizedBox1,
                               Row(
                                 children: [
                                   Text(
-                                    myRecipesItemModel!.foodtype,
+                                    widget.myRecipesItemModel!.foodtype,
                                     textAlign: TextAlign.start,
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
                                     style:
                                         Theme.of(context).textTheme.subtitle2,
                                   ),
+                                  SizedBox(width: 1.w),
                                   Text(
-                                    myRecipesItemModel!.duration,
+                                    widget.myRecipesItemModel!.duration,
                                     textAlign: TextAlign.start,
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
                                     style:
                                         Theme.of(context).textTheme.subtitle2,
-                                  )
+                                  ),
                                 ],
                               ),
                               kSizedBox2,
@@ -118,14 +148,14 @@ class MyRecipeDetailScreen extends StatelessWidget {
                                   Row(
                                     children: [
                                       CircleAvatar(
-                                        backgroundImage: AssetImage(
-                                            myProfileDetailModel!.myImage),
+                                        backgroundImage: AssetImage(widget
+                                            .myProfileDetailModel!.myImage),
                                       ),
                                       SizedBox(
                                         width: 3.w,
                                       ),
                                       Text(
-                                        myProfileDetailModel!.myName,
+                                        widget.myProfileDetailModel!.myName,
                                         style: Theme.of(context)
                                             .textTheme
                                             .subtitle2!
@@ -134,12 +164,12 @@ class MyRecipeDetailScreen extends StatelessWidget {
                                               fontWeight: FontWeight.w900,
                                               fontSize: 11.sp,
                                             ),
-                                      )
+                                      ),
                                     ],
                                   ),
                                   Row(
                                     children: [
-                                      const Icon(
+                                      Icon(
                                         Icons.favorite,
                                         color: kErrorBorderColor,
                                       ),
@@ -147,7 +177,7 @@ class MyRecipeDetailScreen extends StatelessWidget {
                                         width: 1.w,
                                       ),
                                       Text(
-                                        "${myRecipesItemModel!.likesCount}Likes",
+                                        "${widget.myRecipesItemModel!.likesCount} Likes",
                                         style: Theme.of(context)
                                             .textTheme
                                             .subtitle2!
@@ -156,7 +186,7 @@ class MyRecipeDetailScreen extends StatelessWidget {
                                               fontWeight: FontWeight.w300,
                                               letterSpacing: 0.5,
                                             ),
-                                      )
+                                      ),
                                     ],
                                   ),
                                 ],
@@ -170,7 +200,7 @@ class MyRecipeDetailScreen extends StatelessWidget {
                               ),
                               kSizedBox2,
                               Text(
-                                myRecipesItemModel!.description,
+                                widget.myRecipesItemModel!.description,
                                 style: Theme.of(context).textTheme.subtitle2,
                               ),
                               kSizedBox2,
@@ -182,10 +212,10 @@ class MyRecipeDetailScreen extends StatelessWidget {
                               ),
                               kSizedBox2,
                               kSizedBox1,
-                              //
                               Text(
                                 getNowLingString(
-                                    myRecipesItemModel!.ingredients.toList(),
+                                    widget.myRecipesItemModel!.ingredients
+                                        .toList(),
                                     '•'),
                                 style: Theme.of(context)
                                     .textTheme
@@ -203,21 +233,30 @@ class MyRecipeDetailScreen extends StatelessWidget {
                               ),
                               kSizedBox2,
                               kSizedBox1,
-                              Text(
-                                getNowLingString(
-                                    myRecipesItemModel!.recipesSteps.toList(),
-                                    '•'),
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .subtitle2!
-                                    .copyWith(
-                                      fontWeight: FontWeight.w700,
-                                      color: kTextPrimaryColor,
-                                      letterSpacing: 0.5,
+                              // Update this part to show numbered list
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: List.generate(
+                                  widget
+                                      .myRecipesItemModel!.recipesSteps.length,
+                                  (index) => Padding(
+                                    padding: EdgeInsets.symmetric(vertical: 4),
+                                    child: Text(
+                                      '${index + 1}. ${widget.myRecipesItemModel!.recipesSteps[index]}',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .subtitle2!
+                                          .copyWith(
+                                            fontWeight: FontWeight.w700,
+                                            color: kTextPrimaryColor,
+                                            letterSpacing: 0.5,
+                                          ),
                                     ),
+                                  ),
+                                ),
                               ),
                             ],
-                          )
+                          ),
                         ],
                       ),
                     ),
@@ -227,28 +266,30 @@ class MyRecipeDetailScreen extends StatelessWidget {
             ),
           ),
           Positioned(
-              top: 40,
-              left: 10,
-              child: InkWell(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Container(
-                  width: 12.w,
-                  height: 6.h,
-                  decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 255, 255, 255).withOpacity(0.8),
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Color(0x0fffffff),
-                        blurRadius: 4,
-                      )
-                    ],
-                  ),
-                  child: const Icon(CupertinoIcons.back),
+            top: 40,
+            left: 10,
+            child: InkWell(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Container(
+                width: 12.w,
+                height: 6.h,
+                decoration: BoxDecoration(
+                  color:
+                      const Color.fromARGB(255, 255, 255, 255).withOpacity(0.8),
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Color(0x0fffffff),
+                      blurRadius: 4,
+                    ),
+                  ],
                 ),
-              ))
+                child: const Icon(CupertinoIcons.back),
+              ),
+            ),
+          ),
         ],
       ),
     );
