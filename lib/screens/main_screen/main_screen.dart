@@ -5,6 +5,7 @@ import 'package:resepsi_2/constants.dart';
 import 'package:resepsi_2/global_widgets/custom_bottombar.dart';
 import 'package:resepsi_2/screens/home_screens/home_screen.dart';
 import 'package:resepsi_2/screens/profile_screen/profile_screen.dart';
+import 'package:resepsi_2/screens/upload_screen/upload_screen.dart';
 import 'package:sizer/sizer.dart';
 
 class MainScreen extends StatefulWidget {
@@ -96,9 +97,7 @@ class _MainScreenState extends State<MainScreen> {
         physics: const NeverScrollableScrollPhysics(),
         children: const <Widget>[
           HomeScreen(),
-          Center(
-            child: Text('Upload'),
-          ),
+          UploadScreen(),
           Center(
             child: Text('Notification'),
           ),

@@ -9,6 +9,8 @@ import 'package:resepsi_2/screens/otp_screen/otp_screen.dart';
 import 'package:resepsi_2/screens/profile_screen/my_recipes_detail/my_homerecipe_detail.dart';
 import 'package:resepsi_2/screens/profile_screen/my_recipes_detail/my_recipe_detail.dart';
 import 'package:resepsi_2/screens/profile_screen/profile_screen.dart';
+import 'package:resepsi_2/screens/upload_screen/Upload_recipe_success.dart';
+import 'package:resepsi_2/screens/upload_screen/upload_screen.dart';
 import 'package:sizer/sizer.dart';
 import 'screens/intro_screen/intro_screen.dart';
 import 'screens/sign_in_screen/sign_in_screen.dart';
@@ -130,6 +132,8 @@ class MyApp extends StatelessWidget {
             MainScreen.routeName: (context) => MainScreen(),
             HomeScreen.routeName: (context) => HomeScreen(),
             MyHomeDetailScreen.routeName: (context) => MyHomeDetailScreen(),
+            UploadScreen.routeName: (context) => UploadScreen(),
+            RecipeSuccessScreen.routeName: (context) => RecipeSuccessScreen(),
             MyProfileScreen.routeName: (context) => MyProfileScreen(),
             MyRecipeDetailScreen.routeName: (context) => MyRecipeDetailScreen(),
           },
