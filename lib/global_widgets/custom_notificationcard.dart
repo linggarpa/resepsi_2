@@ -82,7 +82,7 @@ class _CustomNotificationCardState extends State<CustomNotificationCard> {
           ElevatedButton(
             onPressed:
                 _toggleFollow, // Memanggil fungsi toggle follow saat tombol diklik
-            child: Text(isFollowing ? 'Unfollow' : 'Follow'),
+            child: Text(isFollowing ? 'Unfollow' : 'Follow back'),
             style: ElevatedButton.styleFrom(
               foregroundColor: Colors.white,
               backgroundColor: isFollowing ? Colors.red : kPrimaryColor,
