@@ -101,7 +101,8 @@ class _UploadScreenState extends State<UploadScreen> {
                                   return Center(
                                     child: Text(
                                       'Failed to load image',
-                                      style: TextStyle(color: Colors.red),
+                                      style:
+                                          TextStyle(color: kErrorBorderColor),
                                     ),
                                   );
                                 },
