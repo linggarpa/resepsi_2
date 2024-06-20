@@ -105,7 +105,7 @@ List<HomeItemModel> homeModel = [
     "assets/images/karina.jpeg",
     "Karina",
     "assets/images/perkedel.jpg",
-    "Perkedel Kentang isi ayam",
+    "Perkedel Isi Ayam",
     "Food",
     "> 90 min",
     "50",

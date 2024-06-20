@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:resepsi_2/constants.dart';
+import 'package:resepsi_2/global_widgets/custom_btn.dart';
 import 'package:resepsi_2/screens/upload_screen/Upload_recipe_success.dart';
 import 'package:sizer/sizer.dart';
 
@@ -22,19 +23,8 @@ class _UploadScreenState extends State<UploadScreen> {
   final _durationController = TextEditingController();
   XFile? _image;
 
-  final ImagePicker _picker = ImagePicker();
-
-  Future<void> _pickImage() async {
-    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
-
-    setState(() {
-      _image = pickedFile;
-    });
-  }
-
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
-      // Simpan atau proses data resep
       print('Title: ${_titleController.text}');
       print('Description: ${_descriptionController.text}');
       print('Ingredients: ${_ingredientsController.text}');
@@ -42,7 +32,6 @@ class _UploadScreenState extends State<UploadScreen> {
       print('Duration: ${_durationController.text}');
       print('Image Path: ${_image?.path}');
 
-      // Pindah ke halaman berikutnya
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => RecipeSuccessScreen()),
@@ -73,7 +62,7 @@ class _UploadScreenState extends State<UploadScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   GestureDetector(
-                    onTap: _pickImage,
+                    onTap: () {},
                     child: Container(
                       width: double.infinity,
                       height: 30.h,
@@ -108,6 +97,14 @@ class _UploadScreenState extends State<UploadScreen> {
                                 width: double.infinity,
                                 height: double.infinity,
                                 fit: BoxFit.cover,
+                                errorBuilder: (context, error, stackTrace) {
+                                  return Center(
+                                    child: Text(
+                                      'Failed to load image',
+                                      style: TextStyle(color: Colors.red),
+                                    ),
+                                  );
+                                },
                               ),
                             ),
                     ),
@@ -186,31 +183,9 @@ class _UploadScreenState extends State<UploadScreen> {
                     },
                   ),
                   SizedBox(height: 4.h),
-                  Center(
-                    child: SizedBox(
-                      width: double.infinity,
-                      height: 6.h,
-                      child: OutlinedButton(
-                        onPressed: _submitForm,
-                        style: OutlinedButton.styleFrom(
-                          side: BorderSide(
-                              color: kPrimaryColor,
-                              width: 2), // Warna dan lebar border
-                          shape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.circular(10), // Radius sudut
-                          ),
-                        ),
-                        child: Text(
-                          'Submit',
-                          style: TextStyle(
-                            fontSize: 14.sp,
-                            color:
-                                kPrimaryColor, // Warna teks sesuai dengan warna utama
-                          ),
-                        ),
-                      ),
-                    ),
+                  CustomBtn(
+                    onPress: _submitForm,
+                    title: 'Upload',
                   ),
                 ],
               ),
