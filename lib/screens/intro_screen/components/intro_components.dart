@@ -36,7 +36,7 @@ class CustomStack extends StatelessWidget {
               rad1: 44,
               rad2: 44,
               rad3: 44,
-              img: 'assets/images/Carbonara.jpg'),
+              img: 'assets/images/nasgor.jpeg'),
           CustomPositionWidget(
               top: 221,
               left: 107,
@@ -45,7 +45,7 @@ class CustomStack extends StatelessWidget {
               rad1: 80,
               rad2: 80,
               rad3: 80,
-              img: 'assets/images/salad.jpg'),
+              img: 'assets/images/ramen.jpg'),
           CustomPositionWidget(
               top: 267,
               left: -33,
@@ -54,7 +54,7 @@ class CustomStack extends StatelessWidget {
               rad1: 50,
               rad2: 50,
               rad3: 50,
-              img: 'assets/images/pencake.jpg'),
+              img: 'assets/images/thaitea.jpg'),
           CustomPositionWidget(
               top: 299,
               left: 289,
@@ -63,7 +63,7 @@ class CustomStack extends StatelessWidget {
               rad1: 80,
               rad2: 80,
               rad3: 80,
-              img: 'assets/images/pizza.jpg'),
+              img: 'assets/images/martabak-mini.jpg'),
           CustomPositionWidget(
               top: 402,
               left: 181,
